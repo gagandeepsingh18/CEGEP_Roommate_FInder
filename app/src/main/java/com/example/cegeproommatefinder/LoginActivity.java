@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 
 public class LoginActivity extends AppCompatActivity {
     EditText Email, Password;
-    Button Login;
+    Button Login,Register;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         Email = findViewById(R.id.EmailAddressInput);
         Password= findViewById(R.id.PasswordInput);
         Login = findViewById(R.id.LoginButton);
+        Register = findViewById(R.id.RegistrationPageButton);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -50,6 +51,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              RegisterFun();
+            }
+        });
     }
     private void LoginValidation(String email,String pwd)
     {
@@ -67,4 +75,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void RegisterFun(){
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
 }

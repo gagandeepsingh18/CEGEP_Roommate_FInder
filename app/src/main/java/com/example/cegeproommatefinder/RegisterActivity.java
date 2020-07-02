@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText Email, Password, ConfirmPassword;
-    Button CreateAccount;
+    Button CreateAccount, Login;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         Password= findViewById(R.id.PasswordInput);
         ConfirmPassword= findViewById(R.id.ConfirmPasswordInput);
         CreateAccount = findViewById(R.id.RegistrationButton);
+        Login = findViewById(R.id.LoginPageButton);
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference("users");
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = Email.getText().toString();
                 String password = Password.getText().toString();
                 String confirmpassword = ConfirmPassword.getText().toString();
+                if (password.equals(confirmpassword)){
                 final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -73,7 +75,23 @@ public class RegisterActivity extends AppCompatActivity {
                 });
 
             }
+                else
+                {
+                    Toast.makeText(RegisterActivity.this,"Password and Confirm Password fields do not match", Toast.LENGTH_SHORT).show();
+
+                }
+            }
         });
 
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            LoginFun();
+            }
+        });
     }
+public void LoginFun(){
+    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+    startActivity(intent);
+}
 }

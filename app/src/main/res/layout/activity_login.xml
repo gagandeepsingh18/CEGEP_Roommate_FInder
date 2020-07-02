@@ -12,7 +12,7 @@
         android:id="@+id/LoginLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="40dp"
         android:text="Login"
         android:textColor="#FFFFFF"
         android:textSize="50dp"
@@ -91,5 +91,18 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PasswordInput" />
+
+    <Button
+        android:id="@+id/RegistrationPageButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/editbox"
+        android:backgroundTint="#42f5ce"
+        android:text="Create New Account"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
