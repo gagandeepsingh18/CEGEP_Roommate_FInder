@@ -8,16 +8,56 @@
     tools:context=".LoginActivity">
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"/>
+        android:padding="@dimen/inner_frame_layout_padding"
+        tools:layout_editor_absoluteX="-25dp"
+        tools:layout_editor_absoluteY="63dp">
+
+        <TextView
+            android:id="@+id/complainttextt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Write your Complaint"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="142dp" />
+
+        <EditText
+            android:id="@+id/ComplaintInput"
+            android:layout_width="325dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="64dp"
+            android:backgroundTint="#000080"
+            android:ems="10"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.383"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/complainttextt" />
+
+        <Button
+            android:id="@+id/SubmitButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="52dp"
+            android:backgroundTint="#42f5ce"
+            android:text="SUBMIT"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="505dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/ComplaintLanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="COMPLAINT"
+        android:text="Complaint"
         android:textColor="#FFFFFF"
         android:textSize="50dp"
         android:textStyle="bold"
@@ -25,41 +65,5 @@
         app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/EmailLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Write your Complaint"
-        android:textColor="#FFFFFF"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-    <EditText
-        android:id="@+id/ComplaintInput"
-        android:layout_width="325dp"
-        android:layout_height="325dp"
-        android:backgroundTint="#000080"
-        android:ems="10"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.581"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
-
-    <Button
-        android:id="@+id/SubmitButton"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#42f5ce"
-        android:text="SUBMIT"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ComplaintInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
