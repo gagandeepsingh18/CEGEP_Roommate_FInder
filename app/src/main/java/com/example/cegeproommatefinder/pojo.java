@@ -1,4 +1,4 @@
-package com.example.schedulemeet;
+package com.example.cegeproommatefinder;
 
 public class pojo {
 
