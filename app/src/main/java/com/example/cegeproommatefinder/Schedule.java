@@ -36,7 +36,7 @@ EditText Name,Date,Time,Location,Email1,Email2,Email3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.schedule);
 
 Name=findViewById(R.id.name);
         Date=findViewById(R.id.pickdate);
