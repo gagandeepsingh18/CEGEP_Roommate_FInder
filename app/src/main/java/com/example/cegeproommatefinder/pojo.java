@@ -10,7 +10,7 @@ public class pojo {
     public String recipient2;
     public String recipient3;
 
-    public pojo(String name, String date, String time, String location, String recipient1, String recipient2, String recipient3) {
+    public pojo (String name, String date, String time, String location, String recipient1, String recipient2, String recipient3) {
         this.name = name;
         this.date = date;
         this.time = time;
