@@ -2,63 +2,130 @@ package com.example.cegeproommatefinder;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    NavController navController;
+    private RecyclerView recyclerView;
+    RecyclerAdapter recyclerAdapter;
+    ArrayList<Post> arrayList;
 
     public MainFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        Log.d("Default Fragment :","OnCreate Called!");
+
+        navController = Navigation.findNavController(getActivity(),R.id.NavigationMainFragment);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Log.d("Default Fragment :","OnCreateView Called!");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d("Default Fragment :","OnViewCreated Called!");
+
+
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+
+        Call<PostDetails> call = service.getPost();
+
+        call.enqueue(new Callback<PostDetails>() {
+            @Override
+            public void onResponse(Call<PostDetails> call, Response<PostDetails> response) {
+
+                System.out.println("Response From URL :" + response.body());
+
+                try {
+                    PostDetails post = response.body();
+
+                    arrayList = new ArrayList<>(post.getPost());
+
+                    Log.d("Arraylist size :","Size :"+arrayList.size());
+
+                    generateView(arrayList,view);
+
+                }catch (NullPointerException e)
+                {
+                    System.out.println("Nullpointer Exception :"+e.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<PostDetails> call, Throwable t) {
+
+                System.out.println("In Failure :" + t.getMessage());
+
+            }
+        });
+
+    }
+
+    public void generateView(ArrayList<Post> array, View view)
+    {
+
+        recyclerAdapter = new RecyclerAdapter(array, getActivity().getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+        recyclerView = view.findViewById(R.id.main_recyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerAdapter.setOnClickListner(onClickListener);
+
+
+    }
+
+    public View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+            int position = viewHolder.getAdapterPosition();
+
+            Toast.makeText(getActivity().getApplicationContext(),arrayList.get(position).getPostTitle(),Toast.LENGTH_SHORT).show();
+
+            Bundle b = new Bundle();
+
+
+            navController.navigate(R.id.post_details_Fragment,b);
+
+
+
+
+        }
+    };
+
+
 }
