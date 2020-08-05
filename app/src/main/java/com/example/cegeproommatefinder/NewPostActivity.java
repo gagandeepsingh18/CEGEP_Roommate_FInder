@@ -74,10 +74,10 @@ public class NewPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_post);
 
 
-        actionBar= getSupportActionBar();
+       /* actionBar= getSupportActionBar();
         actionBar.setTitle("Post a new Add");
         actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true); */
 
         firebaseAuth= FirebaseAuth.getInstance();
         CheckUserStatus();
