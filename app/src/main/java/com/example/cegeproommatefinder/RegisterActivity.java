@@ -28,7 +28,6 @@ public class RegisterActivity extends AppCompatActivity {
     Button CreateAccount, Login;
 
     private FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
 
     @Override
@@ -53,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = Email.getText().toString();
                 String password = Password.getText().toString();
                 String confirmpassword = ConfirmPassword.getText().toString();
-                String name= Name.getText().toString();
+                final String name= Name.getText().toString();
                     if (password.equals(confirmpassword)) {
 
                         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -69,11 +68,10 @@ public class RegisterActivity extends AppCompatActivity {
                                                 FirebaseUser user = firebaseAuth.getCurrentUser();
                                                 String userEmail= user.getEmail();
                                                 String userId= user.getUid();
-                                                Log.d("Tag", userId);
 
                                                 HashMap<Object, String> hashMap= new HashMap<>();
                                                 hashMap.put("email", userEmail);
-                                                hashMap.put("name", " ");
+                                                hashMap.put("name", name);
                                                 hashMap.put("uid", userId);
 
                                                 FirebaseDatabase database= FirebaseDatabase.getInstance();
