@@ -50,12 +50,17 @@
             android:inputType="textEmailAddress"
             android:padding="20dp"
             />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Calander"
+            android:id="@+id/Calander_show"/>
 
         <EditText
-            android:id="@+id/pickdate"
+            android:id="@+id/show_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="dd/mm/yyyy (Enter Date)"
+            android:hint="dd/mm/yyyy"
             android:inputType="date"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"

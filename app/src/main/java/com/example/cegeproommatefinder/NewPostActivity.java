@@ -18,6 +18,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,8 +34,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -57,10 +62,10 @@ public class NewPostActivity extends AppCompatActivity {
     ImageView imageView;
     Button NewPost;
     FirebaseAuth firebaseAuth;
-    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
-    ProgressBar pd;
-    FirebaseAuth mAuth;
+
+    String name, email, uid;
     Uri imageUri = null;
 
     @Override
@@ -68,26 +73,41 @@ public class NewPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
 
-// ...
-// Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+
         actionBar= getSupportActionBar();
         actionBar.setTitle("Post a new Add");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         firebaseAuth= FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        CheckUserStatus();
 
 
         CameraPermission = new String[] {Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE };
         StoragePermission = new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE };
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        Query query= databaseReference.orderByChild("email").equalTo(email);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    name = ""+ dataSnapshot.child("name").getValue();
+                    email = ""+ dataSnapshot.child("email").getValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            Toast.makeText(NewPostActivity.this, "hello", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         Title = findViewById(R.id.NewPostTitleInput);
         Description = findViewById(R.id.NewPostDescriptionInput);
         imageView = findViewById(R.id.NewPostImage);
         NewPost = findViewById(R.id.NewPostButton);
-        pd = new ProgressBar(this);
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,67 +115,89 @@ public class NewPostActivity extends AppCompatActivity {
             }
         });
 
+
+
         NewPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String PostTitle = Title.getText().toString().trim();
                 String PostDescription =Description.getText().toString().trim();
+                if(TextUtils.isEmpty(PostTitle)){
+                    Toast.makeText(NewPostActivity.this, "PLease enter the title for the Post", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+               else if(TextUtils.isEmpty(PostDescription)){
+                    Toast.makeText(NewPostActivity.this, "PLease enter the title for the Post", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+               else {
                 PostAdFun(PostTitle, PostDescription, String.valueOf(imageUri));
+               }
             }
         });
 
     }
+
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        CheckUserStatus();
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CheckUserStatus();
+    }
+
+
+
+    private void CheckUserStatus() {
+        FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
+        if (firebaseUser != null){
+         email = firebaseUser.getEmail();
+         uid = firebaseUser.getUid();
+        }
+        else {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+    }
+
+
 
     private void PostAdFun(final String postTitle, final String postDescription, final String uri) {
-        mAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "signInAnonymously:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "signInAnonymously:failure", task.getException());
-                            Toast.makeText(NewPostActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-
-                        }
-
-                        // ...
-                    }
-                });
 
         final String timestamp = String.valueOf(System.currentTimeMillis());
-        final String databasePath = "Posts/" + "post_" + timestamp;
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(databasePath);
+        Log.d("gagan", timestamp);
+        String databasePath = "Posts/" + "post_" + timestamp;
+        Log.d("gagan", databasePath);
+        StorageReference  storageRef  = FirebaseStorage.getInstance().getReference().child(databasePath);
         storageRef.putFile(Uri.parse(uri))
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.d("", uri);
-                        Toast.makeText(NewPostActivity.this, String.valueOf(uri), Toast.LENGTH_SHORT).show();
+                        //Log.d("gagan", uri);
+                       // Toast.makeText(NewPostActivity.this, String.valueOf(uri), Toast.LENGTH_SHORT).show();
                         Task<Uri> uriTask= taskSnapshot.getStorage().getDownloadUrl();
-                        while (!uriTask.isSuccessful());
-
+                        while(!uriTask.isSuccessful());
+                      //  Log.d("gagan", uri);
                         String downloadUri = uriTask.getResult().toString();
-                        Toast.makeText(NewPostActivity.this, downloadUri, Toast.LENGTH_SHORT).show();
+
                         if (uriTask.isSuccessful()){
+                  //          Log.d("gagan", uri);
                             HashMap<Object, String> hashMap = new HashMap<>();
 
-                            hashMap.put("PostTitle", postTitle);
-                            hashMap.put("PostDescription", postDescription);
-                           // hashMap.put("PostImage", downloadUri);
+                            hashMap.put("uid", uid);
+                            hashMap.put("name", name);
+                            hashMap.put("email", email);
+                            hashMap.put("pid", timestamp);
+                            hashMap.put("postTitle", postTitle);
+                            hashMap.put("postDescription", postDescription);
+                            hashMap.put("postImage", downloadUri);
+                            hashMap.put("postTime", timestamp);
 
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
 
@@ -174,6 +216,12 @@ public class NewPostActivity extends AppCompatActivity {
                                     });
                         }
 
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("gagan", ""+e);
                     }
                 });
     }
@@ -314,3 +362,4 @@ public class NewPostActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 }
+
