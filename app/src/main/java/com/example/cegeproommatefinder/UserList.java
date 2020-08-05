@@ -71,6 +71,7 @@ public class UserList extends AppCompatActivity {
                  int indexOf =arrayList.indexOf(name);
                  String email=emailList.get(indexOf);
                 Intent intent =new Intent(UserList.this,UserChat.class);
+                intent.putExtra("email",email);
                 startActivity(intent);
                 finish();
 
