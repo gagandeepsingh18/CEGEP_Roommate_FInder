@@ -49,7 +49,7 @@ EditText Name,Date,Time,Location,Email1,Email2,Email3;
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-             showDatePickerDialog();
+           //  showDatePickerDialog();
             }
         });
 
@@ -64,12 +64,11 @@ EditText Name,Date,Time,Location,Email1,Email2,Email3;
           myRef=   FirebaseDatabase.getInstance().getReference("Meetings");
 
         }
-        @RequiresApi(api = Build.VERSION_CODES.N)
+       /* @RequiresApi(api = Build.VERSION_CODES.N)
         private void showDatePickerDialog(){
         DatePickerDialog DatePickerDialog;
             DatePickerDialog = new DatePickerDialog(
                     Context; this,
-                    this,
               Calendar.getInstance().get(Calendar.YEAR),
                     Calendar.getInstance().get(Calendar.MONTH),
                     Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
@@ -77,7 +76,7 @@ EditText Name,Date,Time,Location,Email1,Email2,Email3;
         DatePickerDialog.show();
 
         }
-
+*/
     @SuppressLint("LongLogTag")
     public void sendEmail(View view) {
 

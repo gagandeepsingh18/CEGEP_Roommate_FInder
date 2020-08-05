@@ -1,6 +1,8 @@
 package com.example.cegeproommatefinder;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,17 +30,34 @@ public class AdapterPost  extends  RecyclerView.Adapter<AdapterPost.PostHolder>{
     @NonNull
     @Override
     public PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view= LayoutInflater.from(context).inflate(R.layout.recycleitem, parent, false);
+
+        return new PostHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PostHolder holder, int position) {
+            String postTitle = postList.get(position).getPostTitle();
+            String postDesc = postList.get(position).getPostDescription();
+            String postImage = postList.get(position).getPostImage();
+
+            holder.postTitle.setText(postTitle);
+            holder.postDesc.setText(postDesc);
+
+            try {
+                Picasso.get().load(postImage).into(holder.postImage);
+            }
+            catch (Exception e)
+            {
+                Log.d("gagan", "onBindViewHolder: "+e);
+            }
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return postList.size();
     }
 
     class PostHolder extends RecyclerView.ViewHolder{
@@ -48,9 +69,10 @@ public class AdapterPost  extends  RecyclerView.Adapter<AdapterPost.PostHolder>{
             super(itemView);
             postTitle = itemView.findViewById(R.id.PostTitle);
             postDesc = itemView.findViewById(R.id.PostDescription);
-            postImage = itemView.findViewById(R.id.PostImage );
+            postImage = itemView.findViewById(R.id.PostImage);
 
         }
+
     }
 }
 

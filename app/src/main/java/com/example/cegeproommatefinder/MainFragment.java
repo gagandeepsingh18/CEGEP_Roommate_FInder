@@ -16,7 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,108 +31,57 @@ import retrofit2.Response;
 
 public class MainFragment extends Fragment {
 
-    NavController navController;
-    private RecyclerView recyclerView;
-    RecyclerAdapter recyclerAdapter;
-    ArrayList<Post> arrayList;
+    RecyclerView recyclerView;
+    List<ModelPost> postList;
+    AdapterPost adapterPost;
 
     public MainFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        Log.d("Default Fragment :","OnCreate Called!");
-
-        navController = Navigation.findNavController(getActivity(),R.id.NavigationMainFragment);
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle saveInstanceState){
+        View view = layoutInflater.inflate(R.layout.fragment_main, container, false);
+        recyclerView= view.findViewById(R.id.PostRecycler);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
 
-        Log.d("Default Fragment :","OnCreateView Called!");
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        postList = new ArrayList<>();
+
+        loadPosts();
+
+        return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Log.d("Default Fragment :","OnViewCreated Called!");
+    private void loadPosts() {
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-
-        Call<PostDetails> call = service.getPost();
-
-        call.enqueue(new Callback<PostDetails>() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onResponse(Call<PostDetails> call, Response<PostDetails> response) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postList.clear();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    ModelPost modelPost= dataSnapshot.getValue(ModelPost.class);
 
-                System.out.println("Response From URL :" + response.body());
+                    postList.add(modelPost);
 
-                try {
-                    PostDetails post = response.body();
+                    adapterPost = new AdapterPost(getActivity(), postList);
 
-                    arrayList = new ArrayList<>(post.getPost());
-
-                    Log.d("Arraylist size :","Size :"+arrayList.size());
-
-                    generateView(arrayList,view);
-
-                }catch (NullPointerException e)
-                {
-                    System.out.println("Nullpointer Exception :"+e.getMessage());
+                    recyclerView.setAdapter(adapterPost);
                 }
-
             }
 
             @Override
-            public void onFailure(Call<PostDetails> call, Throwable t) {
-
-                System.out.println("In Failure :" + t.getMessage());
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
     }
-
-    public void generateView(ArrayList<Post> array, View view)
-    {
-
-        recyclerAdapter = new RecyclerAdapter(array, getActivity().getApplicationContext());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-        recyclerView = view.findViewById(R.id.main_recyclerView);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerAdapter.setOnClickListner(onClickListener);
-
-
-    }
-
-    public View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
-            int position = viewHolder.getAdapterPosition();
-
-            Toast.makeText(getActivity().getApplicationContext(),arrayList.get(position).getPostTitle(),Toast.LENGTH_SHORT).show();
-
-            Bundle b = new Bundle();
-
-
-            navController.navigate(R.id.post_details_Fragment,b);
-
-
-
-
-        }
-    };
 
 
 }
