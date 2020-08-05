@@ -1,5 +1,6 @@
 package com.example.cegeproommatefinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +46,15 @@ public class MainFragment extends Fragment {
         View view = layoutInflater.inflate(R.layout.fragment_main, container, false);
         recyclerView= view.findViewById(R.id.PostRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewPostActivity.class);
+                startActivity(intent);
+            }
+        });
 
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
