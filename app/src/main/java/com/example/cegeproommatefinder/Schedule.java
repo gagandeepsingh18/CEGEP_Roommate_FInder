@@ -1,13 +1,17 @@
 package com.example.cegeproommatefinder;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -25,7 +29,8 @@ import java.util.Calendar;
 
 import static java.util.Calendar.getInstance;
 
-public class Schedule extends AppCompatActivity {
+public class Schedule extends AppCompatActivity implements OnDateSetListener {
+    private TextView datetext;
 
 EditText Name,Date,Time,Location,Email1,Email2,Email3;
 
@@ -39,8 +44,16 @@ EditText Name,Date,Time,Location,Email1,Email2,Email3;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule);
 
-Name=findViewById(R.id.name);
-        Date=findViewById(R.id.pickdate);
+        Name=findViewById(R.id.name);
+        findViewById(R.id.show_date).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+             showDatePickerDialog();
+            }
+        });
+
+        Date=findViewById(R.id.show_date);
         Time=findViewById(R.id.picktime);
         Location=findViewById(R.id.location);
 
@@ -49,6 +62,19 @@ Name=findViewById(R.id.name);
         Email2=findViewById(R.id.email2);
             Email3=findViewById(R.id.email3);
           myRef=   FirebaseDatabase.getInstance().getReference("Meetings");
+
+        }
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        private void showDatePickerDialog(){
+        DatePickerDialog DatePickerDialog;
+            DatePickerDialog = new DatePickerDialog(
+                    Context; this,
+                    this,
+              Calendar.getInstance().get(Calendar.YEAR),
+                    Calendar.getInstance().get(Calendar.MONTH),
+                    Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+        );
+        DatePickerDialog.show();
 
         }
 
@@ -80,5 +106,11 @@ sendmail();
 
         startActivity(Intent.createChooser(intent, ""));
 
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+     String date = "month/day/year:" + month +"/" + dayOfMonth + "/" + year;
+     datetext.setText(date);
     }
 }
