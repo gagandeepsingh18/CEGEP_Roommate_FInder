@@ -8,41 +8,43 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="2dp"
         android:orientation="vertical">
-
-        <EditText
-        android:id="@+id/NewPostTitleInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:hint="Enter Post Title"/>
 
         <ImageView
             android:id="@+id/NewPostImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:minHeight="100dp"
             android:padding="10dp"
-            android:minHeight="100dp"/>
+            />
 
+
+        <EditText
+            android:id="@+id/NewPostTitleInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Enter Post Title"
+            android:padding="10dp" />
 
         <EditText
             android:id="@+id/NewPostDescriptionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:gravity="center"
             android:hint="Enter Post Description"
             android:inputType="textCapSentences|textMultiLine"
             android:minHeight="100dp"
-            android:gravity="center"/>
+            android:padding="10dp" />
 
         <Button
             android:id="@+id/NewPostButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Publish Ad"
-            android:gravity="end"/>
+            android:gravity="center"
+            android:text="Publish Ad" />
     </LinearLayout>
 
 </ScrollView>

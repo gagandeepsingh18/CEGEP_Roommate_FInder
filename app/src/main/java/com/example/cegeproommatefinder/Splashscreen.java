@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import static java.lang.Thread.sleep;
+
 public class Splashscreen extends AppCompatActivity {
     private final int DisplayTime = 2000;
     @Override
@@ -16,9 +18,9 @@ public class Splashscreen extends AppCompatActivity {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent intent = new Intent(Splashscreen.this,MainActivity.class);
-                Splashscreen.this.startActivity(intent);
-                Splashscreen.this.finish();
+                Intent intent = new Intent(Splashscreen.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         }, DisplayTime);
     }

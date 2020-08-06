@@ -43,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.security.Permission;
 import java.util.HashMap;
@@ -72,7 +73,6 @@ public class NewPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
-
 
        /* actionBar= getSupportActionBar();
         actionBar.setTitle("Post a new Add");
@@ -107,6 +107,9 @@ public class NewPostActivity extends AppCompatActivity {
         Description = findViewById(R.id.NewPostDescriptionInput);
         imageView = findViewById(R.id.NewPostImage);
         NewPost = findViewById(R.id.NewPostButton);
+
+        imageView.setImageResource(R.drawable.logo);
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
