@@ -9,4 +9,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_faq">FaqActivity</string>
+    <string name="q_are_the_posts_posted_only_by_the_cegep_students">Q: Are the posts posted only by the CEGEP students?</string>
+    <string name="faq_s">FAQ\'S</string>
+    <string name="q_can_i_pay_through_the_app">Q: Can I pay through the app?</string>
+    <string name="a_unfortunately_we_don_t_have_this_feature_as_of_now_but_will_be_there_in_the_app_shortly">A: Unfortunately, We don\'t have this feature as of now. But, will be there in the app shortly.</string>
+    <string name="a_yes_our_app_is_only_for_the_cegep_students">A: Yes! Our app is only for the CEGEP students.</string>
+    <string name="q_are_the_posts_authenticated">Q: Are the posts authenticated?</string>
+    <string name="a_yes_all_the_posts_are_posted_by_authenticated_cegep_students">A: Yes. All the posts are posted by authenticated CEGEP students.</string>
+    <string name="any_other_query_click_this_button"><![CDATA[Any Other query? Click This Button--->]]></string>
+    <string name="ask_me">Ask Me</string>
 </resources>
