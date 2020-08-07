@@ -1,6 +1,7 @@
 package com.example.cegeproommatefinder;
 
-public class pojo {
+public class
+pojo {
 
     public String name;
     public String date;
