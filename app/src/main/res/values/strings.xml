@@ -18,4 +18,10 @@
     <string name="a_yes_all_the_posts_are_posted_by_authenticated_cegep_students">A: Yes. All the posts are posted by authenticated CEGEP students.</string>
     <string name="any_other_query_click_this_button"><![CDATA[Any Other query? Click This Button--->]]></string>
     <string name="ask_me">Ask Me</string>
+    <string name="if_you_have_any_query_any_complaint_regarding_app_or_post_or_you_have_any_suggestions_please_write_it_here_with_your_phone_number_or_mail">If you have any query, any complaint regarding app or post or you have any suggestions please write it here with your phone number or mail.</string>
+    <string name="message">Message</string>
+    <string name="and_we_will_get_to_you_soon">And we will get to you soon!!!</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="e_mail">E-mail</string>
+    <string name="submit">SUBMIT</string>
 </resources>
