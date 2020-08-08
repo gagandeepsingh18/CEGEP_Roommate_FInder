@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="ABOUT CEGEP"
+        android:text="@string/about_cegep"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Located at the eastern tip of Québec, Canada, the Cégep de la Gaspésie et des Îles is a bilingual (French and English) public institution of higher learning with a student population of about 1250. The Cégep has 4 campuses including the École des pêches et de l’aquaculture du Québec (Quebec’s School of Fisheries and Aquaculture). The Cegep’s slogan, Study in a unique natural environment, was chosen because the location of its campuses in a remote region allows students to enjoy an exceptional natural setting. Indeed, according to the National Geographic magazine, our region is one of the top 20 destinations to visit in the world. Student success is an institutional priority. From day one of their college education, students have access to various academic support measures including personal academic counselling, a guidance service and teacher-student tutoring. A range of adapted services is also available for students with physical, sensory, neurological or organic impairment as well as those with learning disorders or mental health problems. These measures have helped our Cegep achieve a first semester success rate of 84,7% compared to the Quebec college average of 81 %. Studying at the Cégep de la Gaspésie et des Îles provides students with a high quality education in a personalized learning environment!"
+        android:text="@string/located_at_the_eastern_tip_of_qu_bec_canada_the_c_gep_de_la_gasp_sie_et_des_les_is_a_bilingual_french_and_english_public_institution_of_higher_learning_with_a_student_population_of_about_1250_the_c_gep_has_4_campuses_including_the_cole_des_p_ches_et_de_l_aquaculture_du_qu_bec_quebec_s_school_of_fisheries_and_aquaculture_the_cegep_s_slogan_study_in_a_unique_natural_environment_was_chosen_because_the_location_of_its_campuses_in_a_remote_region_allows_students_to_enjoy_an_exceptional_natural_setting_indeed_according_to_the_national_geographic_magazine_our_region_is_one_of_the_top_20_destinations_to_visit_in_the_world_student_success_is_an_institutional_priority_from_day_one_of_their_college_education_students_have_access_to_various_academic_support_measures_including_personal_academic_counselling_a_guidance_service_and_teacher_student_tutoring_a_range_of_adapted_services_is_also_available_for_students_with_physical_sensory_neurological_or_organic_impairment_as_well_as_those_with_learning_disorders_or_mental_health_problems_these_measures_have_helped_our_cegep_achieve_a_first_semester_success_rate_of_84_7_compared_to_the_quebec_college_average_of_81_studying_at_the_c_gep_de_la_gasp_sie_et_des_les_provides_students_with_a_high_quality_education_in_a_personalized_learning_environment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="JOIN US"
+        android:text="@string/join_us"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -50,7 +50,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
         android:onClick="facebook"
-        app:srcCompat="@drawable/fb" />
+        app:srcCompat="@drawable/fb"
+        android:contentDescription="@string/todo" />
 
     <ImageView
         android:id="@+id/insta"
@@ -61,7 +62,8 @@
         app:layout_constraintStart_toEndOf="@+id/facebook"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
         android:onClick="insta"
-        app:srcCompat="@drawable/insta" />
+        app:srcCompat="@drawable/insta"
+        android:contentDescription="@string/todo" />
 
     <ImageView
         android:id="@+id/twitter"
@@ -72,7 +74,8 @@
         app:layout_constraintStart_toEndOf="@+id/insta"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
         android:onClick="twitter"
-        app:srcCompat="@drawable/twitter" />
+        app:srcCompat="@drawable/twitter"
+        android:contentDescription="@string/todo" />
 
     <ImageView
         android:id="@+id/internet"
@@ -80,11 +83,12 @@
         android:layout_height="70dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
+        android:onClick="internet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toEndOf="@+id/twitter"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
-        android:onClick="internet"
-        app:srcCompat="@drawable/InternetExplorer" />
+        app:srcCompat="@drawable/explorer"
+        android:contentDescription="@string/todo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_complaint);
 
 
-        Intent intent=getIntent();
+        Intent AskMeIntent=getIntent();
 
             Button button = findViewById(R.id.SubmitButton);
             button.setOnClickListener(this);
