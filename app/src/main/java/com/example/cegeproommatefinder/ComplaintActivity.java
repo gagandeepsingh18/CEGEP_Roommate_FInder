@@ -1,5 +1,6 @@
 package com.example.cegeproommatefinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.*;
 import android.view.View;
@@ -11,17 +12,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ComplaintActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private TextView mTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint);
 
+
+        Intent intent=getIntent();
+
             Button button = findViewById(R.id.SubmitButton);
             button.setOnClickListener(this);
-        // Enables Always-on
-        //setAmbientEnabled();
+
     }
 
     @Override

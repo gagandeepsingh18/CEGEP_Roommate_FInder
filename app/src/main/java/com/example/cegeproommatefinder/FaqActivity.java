@@ -21,7 +21,11 @@ public class FaqActivity extends AppCompatActivity {
     }
     public void AskMe(View view){
         Intent intent=new Intent(this,ComplaintActivity.class);
+        startActivity(intent);
     }
-
+    public void Cegep(View view){
+        Intent intent=new Intent(this,CegepActivity.class);
+        startActivity(intent);
+    }
 
 }
