@@ -6,4 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".CegepActivity">
 
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="ABOUT CEGEP"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Located at the eastern tip of Québec, Canada, the Cégep de la Gaspésie et des Îles is a bilingual (French and English) public institution of higher learning with a student population of about 1250. The Cégep has 4 campuses including the École des pêches et de l’aquaculture du Québec (Quebec’s School of Fisheries and Aquaculture). The Cegep’s slogan, Study in a unique natural environment, was chosen because the location of its campuses in a remote region allows students to enjoy an exceptional natural setting. Indeed, according to the National Geographic magazine, our region is one of the top 20 destinations to visit in the world. Student success is an institutional priority. From day one of their college education, students have access to various academic support measures including personal academic counselling, a guidance service and teacher-student tutoring. A range of adapted services is also available for students with physical, sensory, neurological or organic impairment as well as those with learning disorders or mental health problems. These measures have helped our Cegep achieve a first semester success rate of 84,7% compared to the Quebec college average of 81 %. Studying at the Cégep de la Gaspésie et des Îles provides students with a high quality education in a personalized learning environment!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="JOIN US"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <ImageView
+        android:id="@+id/facebook"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        android:onClick="facebook"
+        app:srcCompat="@drawable/fb" />
+
+    <ImageView
+        android:id="@+id/insta"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toEndOf="@+id/facebook"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        android:onClick="insta"
+        app:srcCompat="@drawable/insta" />
+
+    <ImageView
+        android:id="@+id/twitter"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toEndOf="@+id/insta"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        android:onClick="twitter"
+        app:srcCompat="@drawable/twitter" />
+
+    <ImageView
+        android:id="@+id/internet"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/twitter"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        android:onClick="internet"
+        app:srcCompat="@drawable/InternetExplorer" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
