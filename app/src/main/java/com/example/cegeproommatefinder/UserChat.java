@@ -41,18 +41,29 @@ Intent intent=getIntent();
 
         c.moveToFirst();
 
-        if (c != null) {
-            do{ msgList.add(c.getString(msgIndex));
+        if (c != null)
+        {
+            do
+                {
+                    msgList.add(c.getString(msgIndex));
                 emaillList.add(c.getString(emailIndex));
-            }while (c.moveToNext());}
+            }while (c.moveToNext());
+        }
+
+
+
+
+
+
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String s1=editText.getText().toString();
                 sqLiteDatabase.execSQL("INSERT INTO theChatUsers (msg,email) VALUES (s1,emaill)");
                   editText.setText("");
-
-            }
+             }
         });
 
 
