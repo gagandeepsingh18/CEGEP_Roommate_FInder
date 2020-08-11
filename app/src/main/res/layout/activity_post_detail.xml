@@ -11,8 +11,91 @@
         android:layout_width="405dp"
         android:layout_height="229dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/roompic" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="265dp"
+        android:layout_height="46dp"
+        android:hint="3 1/2 Apartment"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.348" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="177dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="352dp"
+        android:hint="Harwinder Singh Hayer"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="53dp"
+        android:layout_height="46dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
+        app:srcCompat="@drawable/userpostdetail" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="348dp"
+        android:layout_height="188dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="This apartment is only with just one room.it is totally furnished.And romm is pretty big with the area of q50 sq ft."
+        android:inputType="textMultiLine"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.823" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="194dp"
+        android:layout_height="23dp"
+        android:hint="8899 rue johns , lassale, QC"
+        android:textColorHint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.202"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.425" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="69dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="248dp"
+        android:text="600$"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
