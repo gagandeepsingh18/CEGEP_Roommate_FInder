@@ -7,6 +7,7 @@
     tools:context=".UserList">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userListView"
         android:layout_width="369dp"
         android:layout_height="693dp"
         app:layout_constraintBottom_toBottomOf="parent"
