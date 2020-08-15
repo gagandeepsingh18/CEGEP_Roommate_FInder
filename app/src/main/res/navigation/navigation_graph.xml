@@ -11,5 +11,10 @@
     android:label="fragment_Main"
     tools:layout="@layout/fragment_main" />
 
+    <fragment
+        android:id="@+id/display_Fragment"
+        android:name="com.example.cegeproommatefinder.gagan.DisplayPostFragment"
+        android:label="fragment_Display"
+        tools:layout="@layout/fragment_display_post" />
 
 </navigation>

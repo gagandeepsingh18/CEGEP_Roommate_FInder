@@ -39,7 +39,7 @@ public PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 @Override
 public void onBindViewHolder(@NonNull PostHolder holder, int position) {
         String postTitle = postList.get(position).getPostTitle();
-        String postDesc = postList.get(position).getPostDescription();
+         String postDesc = postList.get(position).getPostDescription();
         String postImage = postList.get(position).getPostImage();
 
         holder.postTitle.setText(postTitle);

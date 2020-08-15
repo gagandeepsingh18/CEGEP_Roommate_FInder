@@ -5,5 +5,39 @@
     android:layout_height="match_parent"
     tools:context=".gagan.DisplayPostFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/PostDetailsImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/PostDetailsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="159dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/PostDetailsDescription"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="50dp"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
 </FrameLayout>

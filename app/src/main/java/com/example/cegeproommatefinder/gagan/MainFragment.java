@@ -124,6 +124,7 @@ public class MainFragment extends Fragment  {
 
             Bundle b = new Bundle();
             b.putParcelable("Post selected", (Parcelable) postList.get(position));
+            navController.navigate(R.id.display_Fragment,b);
 
 
 
