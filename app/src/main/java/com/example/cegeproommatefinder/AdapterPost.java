@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class AdapterPost  extends  RecyclerView.Adapter<AdapterPost.PostHolder>{
 
     Context context;
     List<ModelPost> postList;
+    private View.OnClickListener clickListener;
 
     public AdapterPost(Context context, List<ModelPost> postList) {
         this.context = context;
@@ -71,9 +73,21 @@ public class AdapterPost  extends  RecyclerView.Adapter<AdapterPost.PostHolder>{
             postDesc = itemView.findViewById(R.id.PostDescription);
             postImage = itemView.findViewById(R.id.PostImage);
 
+            itemView.setTag(this);
+
+            itemView.setOnClickListener(clickListener);
+
         }
 
+
+
     }
+
+    public void setOnClickListner(View.OnClickListener onClickListner)
+    {
+        clickListener = onClickListner;
+    }
+
 }
 
 
