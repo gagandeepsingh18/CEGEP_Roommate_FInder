@@ -7,13 +7,9 @@
 
     <fragment
     android:id="@+id/main_Fragment"
-    android:name="com.example.cegeproommatefinder.MainFragment"
+    android:name="com.example.cegeproommatefinder.gagan.MainFragment"
     android:label="fragment_Main"
     tools:layout="@layout/fragment_main" />
 
-    <fragment
-        android:id="@+id/post_details_Fragment"
-        android:name="com.example.cegeproommatefinder.MainFragment"
-        android:label="fragment_Display_Post"
-        tools:layout="@layout/fragment_display_post" />
+
 </navigation>

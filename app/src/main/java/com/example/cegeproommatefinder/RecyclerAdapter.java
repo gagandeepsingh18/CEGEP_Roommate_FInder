@@ -13,8 +13,9 @@ import android.widget.ImageView;
     import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+    import com.example.cegeproommatefinder.gagan.ModelPost;
 
-import java.util.ArrayList;
+    import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
 

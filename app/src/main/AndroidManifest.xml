@@ -25,12 +25,12 @@
 
         <activity
             android:name=".FaqActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".gagan.MainActivity"
             android:label="@string/title_activity_faq">
 
         </activity>
-        <activity android:name=".NewPostActivity" />
-        <activity android:name=".Splashscreen">
+        <activity android:name=".gagan.NewPostActivity" />
+        <activity android:name=".gagan.Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,10 +41,10 @@
         <activity
             android:name=".ComplaintActivity"
             android:label="@string/title_activity_complaint"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
+            android:parentActivityName=".gagan.MainActivity"/>
+        <activity android:name=".gagan.RegisterActivity" />
+        <activity android:name=".gagan.LoginActivity" />
+        <activity android:name=".gagan.MainActivity" />
         <activity android:name=".Schedule" />
     </application>
 

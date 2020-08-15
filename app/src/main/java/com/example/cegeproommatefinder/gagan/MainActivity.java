@@ -1,5 +1,5 @@
 
-package com.example.cegeproommatefinder;
+package com.example.cegeproommatefinder.gagan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.example.cegeproommatefinder.R;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;

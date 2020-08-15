@@ -1,4 +1,4 @@
-package com.example.cegeproommatefinder;
+package com.example.cegeproommatefinder.gagan;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.cegeproommatefinder.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -123,7 +124,7 @@ public class MainFragment extends Fragment  {
 
             Bundle b = new Bundle();
             b.putParcelable("Post selected", (Parcelable) postList.get(position));
-            navController.navigate(R.id.post_details_Fragment,b);
+
 
 
 

@@ -1,4 +1,4 @@
-package com.example.cegeproommatefinder;
+package com.example.cegeproommatefinder.gagan;
 
 import android.os.Parcel;
 import android.os.Parcelable;
