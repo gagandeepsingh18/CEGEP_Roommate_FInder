@@ -44,8 +44,8 @@
             android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="156dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="249dp"
             android:textSize="12sp" />
 
 
