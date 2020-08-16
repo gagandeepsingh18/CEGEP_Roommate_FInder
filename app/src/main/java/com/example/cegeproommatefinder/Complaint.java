@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Complaint {
     private String message;
-    private Integer phone;
+    private Integer phonenumber;
     private String email;
 
     public Complaint() {
@@ -19,11 +19,11 @@ public class Complaint {
     }
 
     public Integer getPhone() {
-        return phone;
+        return phonenumber;
     }
 
     public void setPhone(Long phone) {
-        this.phone = phone;
+        this.phonenumber = phonenumber;
     }
 
     public String getEmail() {
