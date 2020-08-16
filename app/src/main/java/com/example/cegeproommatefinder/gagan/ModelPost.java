@@ -4,21 +4,26 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ModelPost implements Parcelable {
-    String postTitle, postDescription, postImage;
+    String postTitle, postDescription, postImage, name, uid;
 
-    public ModelPost() {
+    public ModelPost(){
+
     }
 
-    public ModelPost(String postTitle, String postDescription, String postImage) {
+    public ModelPost(String postTitle, String postDescription, String postImage, String name, String uid) {
         this.postTitle = postTitle;
         this.postDescription = postDescription;
         this.postImage = postImage;
+        this.name = name;
+        this.uid = uid;
     }
 
     protected ModelPost(Parcel in) {
         postTitle = in.readString();
         postDescription = in.readString();
         postImage = in.readString();
+        name = in.readString();
+        uid = in.readString();
     }
 
     public static final Creator<ModelPost> CREATOR = new Creator<ModelPost>() {
@@ -57,6 +62,21 @@ public class ModelPost implements Parcelable {
         this.postImage = postImage;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     @Override
     public int describeContents() {
@@ -68,5 +88,7 @@ public class ModelPost implements Parcelable {
         dest.writeString(postTitle);
         dest.writeString(postDescription);
         dest.writeString(postImage);
+        dest.writeString(name);
+        dest.writeString(uid);
     }
 }
