@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:drawablePadding="10dp"
+            android:background="@drawable/editbox"
             android:hint="Enter Meeting Name"
             android:inputType="textEmailAddress"
             android:padding="20dp"
@@ -53,7 +54,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Calander"
+            android:text="Calander here"
             android:id="@+id/Calander_show"/>
 
         <EditText
@@ -66,6 +67,7 @@
             android:paddingTop="15dp"
             android:paddingRight="25dp"
             android:paddingBottom="15dp"
+            android:background="@drawable/editbox"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -80,6 +82,7 @@
             android:paddingTop="15dp"
             android:paddingRight="25dp"
             android:paddingBottom="15dp"
+            android:background="@drawable/editbox"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -90,6 +93,7 @@
             android:layout_marginTop="0dp"
             android:drawablePadding="10dp"
             android:hint="Enter Location"
+            android:background="@drawable/editbox"
             android:inputType="textEmailAddress"
             android:padding="20dp"
             />
@@ -113,6 +117,7 @@
             android:layout_marginTop="0dp"
             android:drawablePadding="10dp"
             android:hint="Email Recipient 1"
+            android:background="@drawable/editbox"
             android:inputType="textEmailAddress"
             android:padding="20dp"
             />
@@ -123,6 +128,7 @@
             android:layout_marginTop="0dp"
             android:drawablePadding="10dp"
             android:hint="Email Recipiennt 2"
+            android:background="@drawable/editbox"
             android:inputType="textEmailAddress"
             android:padding="20dp"
             />
@@ -134,6 +140,7 @@
             android:drawablePadding="10dp"
             android:hint="email1 Recipient 3"
             android:inputType="textEmailAddress"
+            android:background="@drawable/editbox"
             android:padding="20dp"
             />
 
@@ -142,10 +149,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@android:color/black"
             android:text="Create Meeting"
-            android:onClick="sendEmail"
-            android:textColor="@android:color/white">
+            android:backgroundTint="#64b5f6"
+            android:onClick="sendEmail">
 
 
         </Button>
