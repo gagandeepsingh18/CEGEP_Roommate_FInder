@@ -1,81 +1,91 @@
 package com.example.cegeproommatefinder;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.TextView;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class UserList extends AppCompatActivity {
-    public SQLiteDatabase sqLiteDatabase;
+
+  private FirebaseDatabase firebaseDatabase;
+   private DatabaseReference databaseReference;
+   private ChildEventListener childEventListener;
+  private RecyclerView recyclerView;
+  private AdapterUser adapterUser;
+
+private List<User> uList;
+
+    Intent intent=getIntent();
+    String name=intent.getStringExtra("postUser");
+    String userId=intent.getStringExtra("userId");
+    String postUserId=intent.getStringExtra("postUserId");
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
-        final ArrayList<String> arrayList = new ArrayList<String>();
-        final ArrayList<String> emailList = new ArrayList<String>();
+firebaseDatabase=FirebaseDatabase.getInstance();
+databaseReference=firebaseDatabase.getReference("UserList");
+        User user=new User(name);
+        databaseReference.child(postUserId).setValue(user);
 
+uList=new ArrayList<>();
 
+recyclerView=findViewById(R.id.recyclerViewUserList);
+recyclerView.setLayoutManager(new LinearLayoutManager(this));
+adapterUser=new AdapterUser(this,uList);
+recyclerView.setAdapter(adapterUser);
 
-        try {
+        childEventListener=new ChildEventListener() {
+    @Override
+    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-         sqLiteDatabase = this.openOrCreateDatabase("DBUSER", MODE_PRIVATE, null);
-            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS theNewUsers (name VARCHAR,email VARCHAR, id INTEGER PRIMARY KEY)");
-           sqLiteDatabase.execSQL("INSERT INTO theNewUsers (name) VALUES ('Harwinder','harry@gmail.com')");
-            //sqLiteDatabase.execSQL("INSERT INTO theNewUsers (name) VALUES ('Gagan')");
-           // sqLiteDatabase.execSQL("INSERT INTO theNewUsers (name) VALUES ('Mani')");
-           // sqLiteDatabase.execSQL("INSERT INTO theNewUsers (name) VALUES ('Vishal')");
-            //sqLiteDatabase.execSQL("INSERT INTO theNewUsers (name) VALUES ('jag')");
-            //sqLiteDatabase.execSQL("INSERT INTO theNewUsers (name) VALUES ('mohit')");
-           // sqLiteDatabase.execSQL("INSERT INTO theNewUsers (name) VALUES ('subham')");
-
-
-
-
-
-            Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM theNewUsers", null);
-            int nameIndex = c.getColumnIndex("name");
-            int emailIndex = c.getColumnIndex("email");
-
-            c.moveToFirst();
-
-            if (c != null) {
-                do{ arrayList.add(c.getString(nameIndex));
-                    emailList.add(c.getString(emailIndex));
-                }while (c.moveToNext());}
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        final ListView listView = findViewById(R.id.userListView);
-
-
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, arrayList);
-
-        listView.setAdapter(arrayAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 String name=listView.getItemAtPosition(i).toString();
-                 int indexOf =arrayList.indexOf(name);
-                 String email=emailList.get(indexOf);
-                Intent intent =new Intent(UserList.this,UserChat.class);
-                intent.putExtra("email",email);
-                startActivity(intent);
-                finish();
-
-            }
-        });
+User user =snapshot.getValue(User.class);
+uList.add(user);
+adapterUser.notifyDataSetChanged();
     }
+
+    @Override
+    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+    }
+
+    @Override
+    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+    }
+
+    @Override
+    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+};
+databaseReference.addChildEventListener(childEventListener);
+    }
+
+
     }

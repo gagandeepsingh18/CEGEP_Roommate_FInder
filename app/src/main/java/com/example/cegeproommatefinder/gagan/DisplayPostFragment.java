@@ -1,5 +1,6 @@
 package com.example.cegeproommatefinder.gagan;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cegeproommatefinder.R;
+import com.example.cegeproommatefinder.UserList;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -74,7 +76,24 @@ public class DisplayPostFragment extends Fragment {
         }
         Toast.makeText(getContext(), currentUser, Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(), uid, Toast.LENGTH_LONG).show();
+        postUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), UserList.class);
+                intent.putExtra("userId",currentUser);
+                intent.putExtra("postUserId",uid);
+                intent.putExtra("postUser",modelPost.getName());
+                startActivity(intent);
+
+
+            }
+        });
+
 
     }
+
+
+
+
 
     }

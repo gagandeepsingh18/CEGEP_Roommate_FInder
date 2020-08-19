@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".UserChat">
 
-    <ListView
-        android:id="@+id/chatList"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewChatList"
         android:layout_width="412dp"
         android:layout_height="601dp"
         android:layout_marginStart="1dp"
@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatList" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewChatList" />
 
     <Button
         android:id="@+id/chatButton"
@@ -48,9 +48,11 @@
         android:layout_marginRight="55dp"
         android:layout_marginBottom="45dp"
         android:text="Button"
+        android:clickable="true"
+        android:onClick="OnClickChat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/chatEdit"
-        app:layout_constraintTop_toBottomOf="@+id/chatList" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewChatList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

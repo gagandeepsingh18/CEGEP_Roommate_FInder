@@ -1,71 +1,116 @@
 package com.example.cegeproommatefinder;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserChat extends AppCompatActivity {
-Intent intent=getIntent();
- String emaill=intent.getStringExtra("email");
 
- Button btn=findViewById(R.id.chatButton);
-    EditText editText=findViewById(R.id.chatEdit);
-   ListView listView=findViewById(R.id.chatList);
+ Button btn;
+    EditText editText;
 
-    public SQLiteDatabase sqLiteDatabase;
+
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private ChildEventListener childEventListener;
+    private RecyclerView recyclerView;
+    private AdapterChat adapterChat;
+
+    private List<Chat> cList;
+
+    Intent intent=getIntent();
+    String name;
+    String userId;
+    String postUserId;
+    String msg;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_chat);
-
-        final ArrayList<String> msgList = new ArrayList<String>();
-        final ArrayList<String> emaillList = new ArrayList<String>();
-
-
-        sqLiteDatabase = this.openOrCreateDatabase("DBUSER", MODE_PRIVATE, null);
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS theChatUsers (msg VARCHAR,email VARCHAR, id INTEGER PRIMARY KEY)");
+        btn=findViewById(R.id.chatButton);
+         editText=findViewById(R.id.chatEdit);
 
 
-        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM theChatUsers where email=emaill", null);
-        int msgIndex = c.getColumnIndex("msg");
-        int emailIndex = c.getColumnIndex("email");
+        Intent intent=getIntent();
+         name=intent.getStringExtra("postUser");
+       userId=intent.getStringExtra("userId");
+        postUserId=intent.getStringExtra("postUserId");
 
-        c.moveToFirst();
+cList=new ArrayList<>();
 
-        if (c != null)
-        {
-            do
-                {
-                    msgList.add(c.getString(msgIndex));
-                emaillList.add(c.getString(emailIndex));
-            }while (c.moveToNext());
-        }
+recyclerView=findViewById(R.id.recyclerViewChatList);
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference("Message");
+      recyclerView.setLayoutManager( new LinearLayoutManager(this));
+    adapterChat=new AdapterChat( this,cList);
 
 
 
 
-
-
-
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        childEventListener=new ChildEventListener() {
             @Override
-            public void onClick(View view) {
-                String s1=editText.getText().toString();
-                sqLiteDatabase.execSQL("INSERT INTO theChatUsers (msg,email) VALUES (s1,emaill)");
-                  editText.setText("");
-             }
-        });
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+Chat chat=snapshot.getValue(Chat.class);
+cList.add(chat);
+adapterChat.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        databaseReference.addChildEventListener(childEventListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        databaseReference.removeEventListener(childEventListener);
+    }
 
 
+    public void OnClickChat(View view) {
+        msg=editText.getText().toString();
+        Chat chat=new Chat(userId,postUserId,msg);
+        String key=databaseReference.push().getKey();
+        databaseReference.child(key).setValue(chat);
     }
 }

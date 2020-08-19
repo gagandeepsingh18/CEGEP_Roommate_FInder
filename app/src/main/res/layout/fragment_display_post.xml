@@ -46,6 +46,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="7dp"
             android:layout_marginTop="249dp"
+            android:clickable="true"
             android:textSize="12sp" />
 
 
