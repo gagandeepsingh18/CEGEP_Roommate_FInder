@@ -17,16 +17,47 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:minHeight="100dp"
-            android:padding="10dp"
-            />
-
-
+            android:padding="10dp" />
         <EditText
             android:id="@+id/NewPostTitleInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:inputType="textCapSentences"
             android:hint="Enter Post Title"
+            android:padding="10dp" />
+        <EditText
+            android:id="@+id/NewPostPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:hint="Enter Price (in Dollars)"
+            android:padding="10dp" />
+        <EditText
+            android:id="@+id/NewPostAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="textCapSentences"
+            android:hint="Enter Address"
+            android:padding="10dp" />
+        <EditText
+            android:id="@+id/NewPostCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="textCapSentences"
+            android:hint="Enter City"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/NewPostPincode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="textCapSentences"
+            android:hint="Enter Pincode"
             android:padding="10dp" />
 
         <EditText
@@ -43,9 +74,9 @@
             android:id="@+id/NewPostButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:backgroundTint="#64b5f6"
             android:background="@drawable/editbox"
+            android:backgroundTint="#64b5f6"
+            android:gravity="center"
             android:text="Publish Ad" />
     </LinearLayout>
 

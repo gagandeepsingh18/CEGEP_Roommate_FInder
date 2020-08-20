@@ -3,54 +3,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".gagan.DisplayPostFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/PostDetailsImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/PostDetailsMainCardView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:contentPadding="5dp"
+            android:layout_marginTop="10dp"
+            android:scrollbars="horizontal">
 
-        <TextView
-            android:id="@+id/PostDetailsTitle"
+            <ImageView
+                android:id="@+id/PostDetailsImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp" />
+
+            <TextView
+                android:id="@+id/PostDetailsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="159dp"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/PostDetailsPrice"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="50dp"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/PostDetailsCity"
+                android:layout_width="253dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="153dp"
+                android:layout_marginTop="91dp"
+                android:textSize="12sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/PostDetailsMainCardView"
+            android:id="@+id/PostDetailsAddressCardView"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:contentPadding="5dp"
+            android:layout_marginTop="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/PostDetailsAddress"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/PostDetailsPincode"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="50dp"
+                android:textSize="12sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/PostDetailsChatCard"
+            android:layout_below="@+id/PostDetailsAddressCardView"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:contentPadding="5dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:id="@+id/PostDetailsUserName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:textSize="12sp" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="159dp"
+            android:layout_below="@+id/PostDetailsChatCard"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:contentPadding="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="10dp">
 
-        <TextView
-            android:id="@+id/PostDetailsDescription"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="156dp"
-            android:layout_marginTop="50dp"
-            android:textSize="12sp" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-
-        <TextView
-            android:id="@+id/PostDetailsUserName"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="249dp"
-            android:clickable="true"
-            android:textSize="12sp" />
-
-
+            <TextView
+                android:id="@+id/PostDetailsDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:textSize="12sp" />
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
 
 
     </RelativeLayout>

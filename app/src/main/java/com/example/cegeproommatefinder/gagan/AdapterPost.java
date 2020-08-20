@@ -41,9 +41,14 @@ public class AdapterPost  extends  RecyclerView.Adapter<AdapterPost.PostHolder> 
         String postTitle = postList.get(position).getPostTitle();
         String postDesc = postList.get(position).getPostDescription();
         String postImage = postList.get(position).getPostImage();
+        String postPrice = postList.get(position).getPostPrice();
+        String postAddress = postList.get(position).getPostAddress();
+        String postCity = postList.get(position).getPostCity();
+        String postPincode = postList.get(position).getPostPincode();
 
         holder.postTitle.setText(postTitle);
-        holder.postDesc.setText(postDesc);
+        holder.postPrice.setText("$ "+postPrice);
+        holder.postCity.setText(postCity);
 
         try {
             Picasso.get().load(postImage).into(holder.postImage);
@@ -61,13 +66,13 @@ public class AdapterPost  extends  RecyclerView.Adapter<AdapterPost.PostHolder> 
 
     class PostHolder extends RecyclerView.ViewHolder {
         ImageView postImage;
-        TextView postTitle, postDesc;
-        ImageButton postDetails;
+        TextView postTitle, postPrice, postCity;
 
         public PostHolder(@NonNull View itemView) {
             super(itemView);
             postTitle = itemView.findViewById(R.id.PostTitle);
-            postDesc = itemView.findViewById(R.id.PostDescription);
+            postPrice = itemView.findViewById(R.id.PostPrice);
+            postCity = itemView.findViewById(R.id.PostCity);
             postImage = itemView.findViewById(R.id.PostImage);
 
             itemView.setTag(this);

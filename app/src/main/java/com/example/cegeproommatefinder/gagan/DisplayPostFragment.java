@@ -25,7 +25,7 @@ import java.util.List;
 
 
 public class DisplayPostFragment extends Fragment {
-    TextView postTitle, postDescription, postUser;
+    TextView postTitle, postDescription, postUser, postPrice, postAddress, postCity,postPincode;
       ImageView postImage;
       String uid, email,currentUser;
 
@@ -60,13 +60,21 @@ public class DisplayPostFragment extends Fragment {
         postTitle = view.findViewById(R.id.PostDetailsTitle);
         postDescription = view.findViewById(R.id.PostDetailsDescription);
         postUser = view.findViewById(R.id.PostDetailsUserName);
+        postPrice = view.findViewById(R.id.PostDetailsPrice);
+        postAddress= view.findViewById(R.id.PostDetailsAddress);
+        postCity= view.findViewById(R.id.PostDetailsCity);
+        postPincode= view.findViewById(R.id.PostDetailsPincode);
 
         modelPost= getArguments().getParcelable("Post selected");
 
         Picasso.get().load(modelPost.getPostImage()).into(postImage);
         postTitle.setText(modelPost.getPostTitle());
         postDescription.setText(modelPost.getPostDescription());
-        postUser.setText(modelPost.getName());
+        postPrice.setText("Price: $"+modelPost.getPostPrice());
+        postAddress.setText("Address:             "+modelPost.getPostAddress());
+        postCity.setText("City: "+modelPost.getPostCity());
+        postPincode.setText("Pincode:             "+modelPost.getPostPincode());
+        postUser.setText("Chat with Authour: "+modelPost.getName());
         uid = modelPost.getUid();
         FirebaseAuth firebaseAuth= FirebaseAuth.getInstance();
         FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
@@ -74,8 +82,7 @@ public class DisplayPostFragment extends Fragment {
             email = firebaseUser.getEmail();
             currentUser = firebaseUser.getUid();
         }
-        Toast.makeText(getContext(), currentUser, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), uid, Toast.LENGTH_LONG).show();
+
         postUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

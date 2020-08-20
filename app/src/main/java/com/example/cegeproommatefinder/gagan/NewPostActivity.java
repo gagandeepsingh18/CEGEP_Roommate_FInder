@@ -53,8 +53,8 @@ public class NewPostActivity extends AppCompatActivity {
 
     String[] CameraPermission, StoragePermission;
 
-    ActionBar actionBar;
-    EditText Title, Description;
+
+    EditText Title, Description, Price, Address, City, Pincode;
     ImageView imageView;
     Button NewPost;
     FirebaseAuth firebaseAuth;
@@ -100,6 +100,11 @@ public class NewPostActivity extends AppCompatActivity {
 
         Title = findViewById(R.id.NewPostTitleInput);
         Description = findViewById(R.id.NewPostDescriptionInput);
+        Price = findViewById(R.id.NewPostPrice);
+        Address = findViewById(R.id.NewPostAddress);
+        City = findViewById(R.id.NewPostCity);
+        Pincode = findViewById(R.id.NewPostPincode);
+
         imageView = findViewById(R.id.NewPostImage);
         NewPost = findViewById(R.id.NewPostButton);
 
@@ -120,21 +125,43 @@ public class NewPostActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String PostTitle = Title.getText().toString().trim();
                 String PostDescription =Description.getText().toString().trim();
+                String PostPrice= Price.getText().toString().trim();
+                String PostAddress= Address.getText().toString().trim();
+                String PostCity= City.getText().toString().trim();
+                String PostPincode= Pincode.getText().toString().trim();
                 if(TextUtils.isEmpty(PostTitle)){
-                    Toast.makeText(NewPostActivity.this, "PLease enter the title for the Post", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewPostActivity.this, "Please enter the title for the Post", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(TextUtils.isEmpty(PostDescription)){
-                    Toast.makeText(NewPostActivity.this, "PLease enter the title for the Post", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewPostActivity.this, "Please enter the title for the Post", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(TextUtils.isEmpty(PostPrice)){
+                    Toast.makeText(NewPostActivity.this, "Please enter the Rent Price", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(TextUtils.isEmpty(PostAddress)){
+                    Toast.makeText(NewPostActivity.this, "Please enter the complete address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(TextUtils.isEmpty(PostCity)){
+                    Toast.makeText(NewPostActivity.this, "Please enter the name of the city", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(TextUtils.isEmpty(PostPincode)){
+                    Toast.makeText(NewPostActivity.this, "Please enter the Pincode", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else {
-                    PostAdFun(PostTitle, PostDescription, String.valueOf(imageUri));
+                    PostAdFun(PostTitle, PostDescription, PostPrice, PostAddress, PostCity, PostPincode, String.valueOf(imageUri));
                 }
             }
         });
 
     }
+
+
 
     @Override
     public void onStart() {
@@ -165,7 +192,7 @@ public class NewPostActivity extends AppCompatActivity {
 
 
 
-    private void PostAdFun(final String postTitle, final String postDescription, final String uri) {
+    private void PostAdFun(final String postTitle, final String postDescription, final String postPrice, final String postAddress, final String postCity, final String postPincode, final String uri) {
 
 
         final String timestamp = String.valueOf(System.currentTimeMillis());
@@ -194,8 +221,13 @@ public class NewPostActivity extends AppCompatActivity {
                             hashMap.put("pid", timestamp);
                             hashMap.put("postTitle", postTitle);
                             hashMap.put("postDescription", postDescription);
+                            hashMap.put("postPrice", postPrice);
+                            hashMap.put("postAddress", postAddress);
+                            hashMap.put("postCity", postCity);
+                            hashMap.put("postPincode", postPincode);
                             hashMap.put("postImage", downloadUri);
                             hashMap.put("postTime", timestamp);
+
 
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
 
