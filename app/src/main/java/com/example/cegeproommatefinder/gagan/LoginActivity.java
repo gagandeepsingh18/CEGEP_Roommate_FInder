@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cegeproommatefinder.R;
+import com.example.cegeproommatefinder.Schedule;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 public class LoginActivity extends AppCompatActivity {
     EditText Email, Password;
     Button Login,Register;
+    TextView skip;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -31,9 +34,17 @@ public class LoginActivity extends AppCompatActivity {
         Email = findViewById(R.id.EmailAddressInput);
         Password= findViewById(R.id.PasswordInput);
         Login = findViewById(R.id.LoginButton);
+        skip = findViewById(R.id.SkipLabel);
         Register = findViewById(R.id.RegistrationPageButton);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, AnonymousActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override

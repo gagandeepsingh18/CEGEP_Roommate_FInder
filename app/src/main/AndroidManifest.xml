@@ -19,16 +19,12 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CegepActivity"></activity>
-
-
-
+        <activity android:name=".gagan.AnonymousActivity"></activity>
+        <activity android:name=".CegepActivity" />
         <activity
             android:name=".FaqActivity"
-            android:parentActivityName=".gagan.MainActivity"
-            android:label="@string/title_activity_faq">
-
-        </activity>
+            android:label="@string/title_activity_faq"
+            android:parentActivityName=".gagan.MainActivity"></activity>
         <activity android:name=".gagan.NewPostActivity" />
         <activity android:name=".gagan.Splashscreen">
             <intent-filter>
@@ -36,16 +32,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ComplaintActivity"
             android:label="@string/title_activity_complaint"
-            android:parentActivityName=".gagan.MainActivity"/>
+            android:parentActivityName=".gagan.MainActivity" />
         <activity android:name=".gagan.RegisterActivity" />
         <activity android:name=".gagan.LoginActivity" />
-        <activity android:name=".gagan.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".gagan.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Schedule" />
     </application>
 

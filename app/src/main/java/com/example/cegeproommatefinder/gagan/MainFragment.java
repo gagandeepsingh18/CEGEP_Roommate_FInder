@@ -41,6 +41,7 @@ public class MainFragment extends Fragment  {
     ArrayList<ModelPost> postList;
     AdapterPost adapterPost;
     NavController navController;
+    String ActivityName;
 
 
     public MainFragment() {
@@ -109,14 +110,32 @@ public class MainFragment extends Fragment  {
         recyclerView = view.findViewById(R.id.PostRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NewPostActivity.class);
-                startActivity(intent);
-            }
-        });
+        if(isAdded()) {
+
+            ActivityName = getActivity().getClass().getSimpleName();
+            //Toast.makeText(getContext(),""+g, Toast.LENGTH_LONG).show();
+        }
+
+        if(ActivityName.equals("AnonymousActivity")){
+            FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        else {
+            FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), NewPostActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
