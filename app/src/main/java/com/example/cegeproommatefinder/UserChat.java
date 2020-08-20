@@ -63,7 +63,7 @@ recyclerView=findViewById(R.id.recyclerViewChatList);
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference("Message");
       recyclerView.setLayoutManager( new LinearLayoutManager(this));
-    adapterChat=new AdapterChat( this,cList);
+    adapterChat=new AdapterChat( this,cList,userId,postUserId);
 
 
 

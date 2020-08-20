@@ -14,10 +14,13 @@ import java.util.List;
 public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ChatViewHolder> {
     private Context context;
     private List<Chat> list;
-public AdapterChat(Context context,List<Chat> list)
+    String sender,reciever;
+public AdapterChat(Context context, List<Chat> list, String userId, String postUserId)
 {
     this.context=context;
     this.list=list;
+    sender=userId;
+    reciever=postUserId;
 }
 
     @NonNull
@@ -30,8 +33,15 @@ public AdapterChat(Context context,List<Chat> list)
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
     Chat chat=list.get(position);
-holder.
-        textView2.setText("");
+    if (sender==chat.getUserId()&&reciever==chat.postUserId){
+        holder.textView1.setText(chat.getMsg());
+
+    }
+        if (reciever==chat.getUserId()&&sender==chat.postUserId){
+            holder.textView2.setText(chat.getMsg());
+
+        }
+
     }
 
     @Override
