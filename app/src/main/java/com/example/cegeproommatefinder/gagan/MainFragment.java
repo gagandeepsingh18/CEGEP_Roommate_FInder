@@ -180,7 +180,7 @@ public class MainFragment extends Fragment  {
                     if (modelPost.getPostTitle().toLowerCase().contains(searchQuery.toLowerCase())||
                             modelPost.getPostDescription().toLowerCase().contains(searchQuery.toLowerCase())||
                             modelPost.getPostCity().toLowerCase().contains(searchQuery.toLowerCase())||
-                            modelPost.getPostPincode().toLowerCase().contains(searchQuery.toLowerCase())||) {
+                            modelPost.getPostPincode().toLowerCase().contains(searchQuery.toLowerCase())) {
                         postList.add(modelPost);
                     }
                     adapterPost = new AdapterPost(getActivity().getApplicationContext(), postList);
