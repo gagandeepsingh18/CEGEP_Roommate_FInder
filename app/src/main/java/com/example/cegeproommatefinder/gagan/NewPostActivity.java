@@ -94,7 +94,7 @@ public class NewPostActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            Toast.makeText(NewPostActivity.this, "hello", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewPostActivity.this, "hello", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,13 +124,13 @@ public class NewPostActivity extends AppCompatActivity {
                     Toast.makeText(NewPostActivity.this, "PLease enter the title for the Post", Toast.LENGTH_SHORT).show();
                     return;
                 }
-               else if(TextUtils.isEmpty(PostDescription)){
+                else if(TextUtils.isEmpty(PostDescription)){
                     Toast.makeText(NewPostActivity.this, "PLease enter the title for the Post", Toast.LENGTH_SHORT).show();
                     return;
                 }
-               else {
-                PostAdFun(PostTitle, PostDescription, String.valueOf(imageUri));
-               }
+                else {
+                    PostAdFun(PostTitle, PostDescription, String.valueOf(imageUri));
+                }
             }
         });
 
@@ -154,8 +154,8 @@ public class NewPostActivity extends AppCompatActivity {
     private void CheckUserStatus() {
         FirebaseUser firebaseUser= firebaseAuth.getCurrentUser();
         if (firebaseUser != null){
-         email = firebaseUser.getEmail();
-         uid = firebaseUser.getUid();
+            email = firebaseUser.getEmail();
+            uid = firebaseUser.getUid();
         }
         else {
             startActivity(new Intent(this, MainActivity.class));
@@ -178,14 +178,14 @@ public class NewPostActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         //Log.d("gagan", uri);
-                       // Toast.makeText(NewPostActivity.this, String.valueOf(uri), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(NewPostActivity.this, String.valueOf(uri), Toast.LENGTH_SHORT).show();
                         Task<Uri> uriTask= taskSnapshot.getStorage().getDownloadUrl();
                         while(!uriTask.isSuccessful());
-                      //  Log.d("gagan", uri);
+                        //  Log.d("gagan", uri);
                         String downloadUri = uriTask.getResult().toString();
 
                         if (uriTask.isSuccessful()){
-                  //          Log.d("gagan", uri);
+                            //          Log.d("gagan", uri);
                             HashMap<Object, String> hashMap = new HashMap<>();
 
                             hashMap.put("uid", uid);
@@ -203,7 +203,7 @@ public class NewPostActivity extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                           Toast.makeText(NewPostActivity.this, "Advertisment is Posted", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(NewPostActivity.this, "Advertisment is Posted", Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -309,16 +309,16 @@ public class NewPostActivity extends AppCompatActivity {
         switch (requestCode){
             case CameraRequest:{
                 if (grantResults.length>0){
-                   boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                   boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
-                   if (cameraAccepted && storageAccepted) {
+                    if (cameraAccepted && storageAccepted) {
 
-                       pickFromCamera();
-                   }
-                   else {
-                       Toast.makeText(this, "Please provide access to both Camera and External Storage", Toast.LENGTH_SHORT).show();
-                   }
+                        pickFromCamera();
+                    }
+                    else {
+                        Toast.makeText(this, "Please provide access to both Camera and External Storage", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
 
@@ -347,17 +347,16 @@ public class NewPostActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    if (resultCode == RESULT_OK){
-        if (requestCode == ImagePickStorage ){
-            imageUri = data.getData();
-            imageView.setImageURI(imageUri);
-        }
-        else if (requestCode == ImagePickCamera){
-            imageView.setImageURI(imageUri);
-        }
+        if (resultCode == RESULT_OK){
+            if (requestCode == ImagePickStorage ){
+                imageUri = data.getData();
+                imageView.setImageURI(imageUri);
+            }
+            else if (requestCode == ImagePickCamera){
+                imageView.setImageURI(imageUri);
+            }
 
-    }
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 }
-

@@ -5,19 +5,27 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.cegeproommatefinder.R;
+import com.example.cegeproommatefinder.Schedule;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,10 +49,56 @@ public class MainFragment extends Fragment  {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-        navController = Navigation.findNavController(getActivity(), R.id.NavigationMainFragment);
+        NavHostFragment navHostFragment= (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.NavigationMainFragment);
+        navController =navHostFragment.getNavController();
+        //Navigation.findNavController(getActivity(), R.id.NavigationMainFragment);
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem search = menu.findItem(R.id.menu_search);
+        SearchView searchView= (SearchView) MenuItemCompat.getActionView(search);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!TextUtils.isEmpty(query)){
+                    searchPosts(query);
+                }
+                else {
+                    loadPosts();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                if (!TextUtils.isEmpty(query)){
+                    searchPosts(query);
+                }
+                else {
+                    loadPosts();
+                }
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_logout:
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -73,7 +127,7 @@ public class MainFragment extends Fragment  {
 
 
 
-        loadPosts(view);
+        loadPosts();
 
 
 
@@ -83,7 +137,7 @@ public class MainFragment extends Fragment  {
 
 
 
-    private void loadPosts(View view) {
+    private void loadPosts() {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
@@ -113,6 +167,38 @@ public class MainFragment extends Fragment  {
         });
     }
 
+    private void searchPosts(String searchQuery){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postList.clear();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    ModelPost modelPost= dataSnapshot.getValue(ModelPost.class);
+
+                    if (modelPost.getPostTitle().toLowerCase().contains(searchQuery.toLowerCase())||
+                            modelPost.getPostDescription().toLowerCase().contains(searchQuery.toLowerCase())) {
+                        postList.add(modelPost);
+                    }
+                    adapterPost = new AdapterPost(getActivity().getApplicationContext(), postList);
+
+                    recyclerView.setAdapter(adapterPost);
+
+                    adapterPost.setOnClickListner(onClickListener);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     public View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -120,7 +206,6 @@ public class MainFragment extends Fragment  {
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
             int position = viewHolder.getAdapterPosition();
 
-            Toast.makeText(getActivity().getApplicationContext(),postList.get(position).getPostTitle(),Toast.LENGTH_SHORT).show();
 
             Bundle b = new Bundle();
             b.putParcelable("Post selected", (Parcelable) postList.get(position));

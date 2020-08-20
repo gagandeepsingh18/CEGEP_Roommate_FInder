@@ -44,7 +44,8 @@
             android:parentActivityName=".gagan.MainActivity"/>
         <activity android:name=".gagan.RegisterActivity" />
         <activity android:name=".gagan.LoginActivity" />
-        <activity android:name=".gagan.MainActivity" />
+        <activity android:name=".gagan.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Schedule" />
     </application>
 

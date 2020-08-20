@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/MainDrawerLayout"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context=".gagan.MainActivity">
 
     <com.google.android.material.navigation.NavigationView
@@ -29,20 +31,20 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
 
-        <fragment
-            android:id="@+id/NavigationMainFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="664dp"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/navigation_graph" />
 
+            <androidx.fragment.app.FragmentContainerView
+             android:id="@+id/NavigationMainFragment"
+             android:name="androidx.navigation.fragment.NavHostFragment"
+             android:layout_width="match_parent"
+             android:layout_height="664dp"
+             app:defaultNavHost="true"
+             app:navGraph="@navigation/navigation_graph" />
 
-    </LinearLayout>
-
-
-
+     </LinearLayout>
 
 
 
-</androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+ </androidx.drawerlayout.widget.DrawerLayout>

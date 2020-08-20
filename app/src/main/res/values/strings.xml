@@ -31,4 +31,6 @@
     <string name="want_to_know_more_about_cegep">Want to know more about CEGEP?</string>
     <string name="click_the_button">Click the Button</string>
     <string name="cegep">CEGEP</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 </resources>
