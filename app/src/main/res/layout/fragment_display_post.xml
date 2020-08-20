@@ -38,6 +38,7 @@
             android:layout_marginTop="50dp"
             android:textSize="12sp" />
 
+
         <TextView
             android:id="@+id/PostDetailsUserName"
             android:layout_width="match_parent"
@@ -48,6 +49,8 @@
             android:layout_marginTop="249dp"
             android:clickable="true"
             android:textSize="12sp" />
+
+
 
 
     </RelativeLayout>
