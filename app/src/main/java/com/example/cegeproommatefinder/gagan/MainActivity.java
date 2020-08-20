@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Toast.makeText(this,""+menuItem.getItemId(), Toast.LENGTH_LONG).show();
+
         switch (menuItem.getItemId()){
             case R.id.menu_home:
                 Fragment fragment = new MainFragment();
