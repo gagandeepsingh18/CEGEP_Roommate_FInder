@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cegeproommatefinder.R;
+import com.example.cegeproommatefinder.UserChat;
 import com.example.cegeproommatefinder.UserList;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -73,17 +74,19 @@ public class DisplayPostFragment extends Fragment {
         if (firebaseUser != null){
             email = firebaseUser.getEmail();
             currentUser = firebaseUser.getUid();
+
         }
         Toast.makeText(getContext(), currentUser, Toast.LENGTH_SHORT).show();
         Toast.makeText(getContext(), uid, Toast.LENGTH_LONG).show();
         postUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), UserList.class);
+                Intent intent=new Intent(getActivity(), UserChat.class);
                 intent.putExtra("userId",currentUser);
                 intent.putExtra("postUserId",uid);
                 intent.putExtra("postUser",modelPost.getName());
                 startActivity(intent);
+                
 
 
             }
