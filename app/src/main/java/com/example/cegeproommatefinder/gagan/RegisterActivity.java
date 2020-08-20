@@ -53,66 +53,66 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = Password.getText().toString();
                 String confirmpassword = ConfirmPassword.getText().toString();
                 final String name= Name.getText().toString();
-                    if (password.equals(confirmpassword)) {
+                if (password.equals(confirmpassword)) {
 
-                        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
                                 /* if (task.isSuccessful()) {
                                     firebaseAuth.getCurrentUser().sendEmailVerification();
                                     firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) { */
-                                            if (task.isSuccessful()) {
+                            if (task.isSuccessful()) {
 
-                                                FirebaseUser user = firebaseAuth.getCurrentUser();
-                                                String userEmail= user.getEmail();
-                                                String userId= user.getUid();
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                String userEmail= user.getEmail();
+                                String userId= user.getUid();
 
-                                                HashMap<Object, String> hashMap= new HashMap<>();
-                                                hashMap.put("email", userEmail);
-                                                hashMap.put("name", name);
-                                                hashMap.put("uid", userId);
+                                HashMap<Object, String> hashMap= new HashMap<>();
+                                hashMap.put("email", userEmail);
+                                hashMap.put("name", name);
+                                hashMap.put("uid", userId);
 
-                                                FirebaseDatabase database= FirebaseDatabase.getInstance();
-                                                DatabaseReference Reference = database.getReference("Users");
+                                FirebaseDatabase database= FirebaseDatabase.getInstance();
+                                DatabaseReference Reference = database.getReference("Users");
 
-                                                Reference.child(userId).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                                        FirebaseAuth.getInstance().signOut();
-                                                    }
-                                                });
-                                            }
-                                            else {
+                                Reference.child(userId).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                        FirebaseAuth.getInstance().signOut();
+                                    }
+                                });
+                            }
+                            else {
 
-                                                Toast.makeText(RegisterActivity.this, "Hello", Toast.LENGTH_SHORT).show();
-                                                FirebaseAuth.getInstance().signOut();
-                                            }
-                                        }
-                                    });
+                                Toast.makeText(RegisterActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                                FirebaseAuth.getInstance().signOut();
+                            }
+                        }
+                    });
                             /*    }
                             }
                         });
 */
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Password and Confirm Password fields do not match", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Password and Confirm Password fields do not match", Toast.LENGTH_SHORT).show();
 
-                    }
                 }
+            }
 
         });
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            LoginFun();
+                LoginFun();
             }
         });
     }
-public void LoginFun(){
-    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-    startActivity(intent);
-}
+    public void LoginFun(){
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
 }
